@@ -1,12 +1,19 @@
 package mail;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Properties;
+import java.util.Scanner;
 
 import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Multipart;
+import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
@@ -15,12 +22,13 @@ import javax.mail.internet.MimeMultipart;
 import com.sun.mail.smtp.SMTPTransport;
 
 public class SendMail {
+	//smtp.gmail.com
+	//smtp.office365
+	private static String SMTP_SERVER;
+	private static String USERNAME;
+	private static String PASSWORD;
 	
-	private static final String SMTP_SERVER = "james.local";
-	private static final String USERNAME = "user01";
-	private static final String PASSWORD = "1234";
-	
-	private static final String EMAIL_FROM = "andreicioanca25@gmail.com";
+	private static String EMAIL_FROM = "andreicioanca25@gmail.com";
 	private static final String EMAIL_TO = "andreicioanca25@gmail.com";
 	
 	private static final String EMAIL_TO_CC = "";
@@ -28,14 +36,41 @@ public class SendMail {
 	private static final String EMAIL_SUBJECT = "Test Send";
 	private static final String EMAIL_TEXT = "Hello!";
 	
-	public static void main(String[] args)
+	public static void main(String[] args) throws FileNotFoundException
 	{
-		Properties properties = System.getProperties();
-		properties.put("mail.smtp.auth", true);
-		//properties.put("mail.smtp.host", "localhost");
-		//properties.put("mail.smtp.port", "25");
+		//Credential Reading
+		File file = new File("C:\\Users\\Visometric2x6\\Desktop\\mailtesting\\test.txt");
+		Scanner sc;
+			sc = new Scanner(file);
 		
-		Session session = Session.getInstance(properties, null);
+		while (sc.hasNextLine())
+		{
+			SMTP_SERVER = sc.nextLine();
+			USERNAME = sc.nextLine();
+			PASSWORD = sc.nextLine();
+			EMAIL_FROM = USERNAME;
+		}
+		
+		
+		//tls 587
+		//ssl 465
+		Properties properties = System.getProperties();
+		properties.put("mail.smtp.port", "587");
+		
+		properties.put("mail.smtp.auth", true);
+		
+		properties.put("mail.smtp.starttls.enable", "true");
+		//properties.put("mail.smtp.socketFactory.port", "465");
+		//properties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+		//properties.put("mail.smtp.host", "localhost");
+
+		
+		Session session = Session.getInstance(properties,
+                new javax.mail.Authenticator() {
+            		protected PasswordAuthentication getPasswordAuthentication() {
+            				return new PasswordAuthentication(USERNAME, PASSWORD);
+            }
+        });
 		
 		Message msg = new MimeMessage(session);
 		
