@@ -1,6 +1,8 @@
 package mail;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -14,7 +16,7 @@ public class UE4Server {
 		
 		try (var listener = new ServerSocket(59898))
 		{
-			System.out.println("Server starting...");
+			System.out.println("Server listening...");
 			var pool = Executors.newFixedThreadPool(20);
 			
 			while (true)
@@ -35,23 +37,21 @@ public class UE4Server {
 
 		@Override
 		public void run() {
+			String str = (char*) data;
 			// TODO Auto-generated method stub
             System.out.println("Connected: " + socket);
-            /*
             try {
-                var in = new Scanner(socket.getInputStream());
-                var out = new PrintWriter(socket.getOutputStream(), true);
-                while (in.hasNextLine()) {
-                    out.println(in.nextLine().toUpperCase());
-                }
-            } catch (Exception e) {
-                System.out.println("Error:" + socket);
-            }
-            */
-          //  finally {
-                try { socket.close(); } catch (IOException e) {}
-                System.out.println("Closed: " + socket);
-            //}
+				BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+				while ((str = br.readLine())  != null)
+				{
+					
+					System.out.println("The message: " + str);
+				}
+			} catch (IOException e) {
+				System.out.println("Client disconnected!");
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 	}
