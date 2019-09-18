@@ -36,7 +36,15 @@ public class SendMail {
 	private static final String EMAIL_SUBJECT = "Test Send";
 	private static final String EMAIL_TEXT = "Hello!";
 	
-	public static void main(String[] args) throws FileNotFoundException
+	private String path;
+	private String name;
+	
+	public SendMail()
+	{
+		
+	}
+	
+	public void sendMessage() throws FileNotFoundException
 	{
 		//Credential Reading
 		File file = new File("C:\\Users\\Visometric2x6\\Desktop\\mailtesting\\test.txt");
@@ -88,7 +96,7 @@ public class SendMail {
 			
 			//File
 			MimeBodyPart p2 = new MimeBodyPart();
-			String filePath = "C:\\Users\\Visometric2x6\\Desktop\\doggo.jpg";
+			String filePath = path+name;
 			FileDataSource fds = new FileDataSource(filePath);
 			p2.setDataHandler(new DataHandler(fds));
 			p2.setFileName(fds.getName());
@@ -117,6 +125,16 @@ public class SendMail {
 		
 		
 		
+	}
+	
+	public void setPath(String path)
+	{
+		this.path = path;
+	}
+	
+	public void setName(String name)
+	{
+		this.name = name;
 	}
 	
 	
