@@ -8,8 +8,11 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
+import java.util.Base64;
 import java.util.Scanner;
 import java.util.concurrent.Executors;
+
+
 
 public class UE4Server {
 	
@@ -47,15 +50,25 @@ public class UE4Server {
 			// TODO Auto-generated method stub
 			int count;
 			byte[] buffer = new byte[8192];
-			String str = null;
+			//String str = null;
             System.out.println("Connected: " + socket);
 			try {
+					String str = null;
 					while ((count = socket.getInputStream().read(buffer)) > 0)
-					System.out.println(str = new String(buffer));
+					{
+						//Save buffer to string
+					//	str = Base64.getEncoder().encodeToString(buffer);
+				//		str = Encoding.Unicode.GetString(bytes);
+					str = new String(buffer);
+					//Remove empty spaces left over from buffer
+					str = str.replaceAll("\u0000", "");
+				//	System.out.println(str = new String(buffer));
+					System.out.println(str);
 					mailSender.setName(str);
-					mailSender.setPath("C:\\Users\\Visometric2x6\\Desktop\\UnrealStudioProjectsAndrei\\VisoArchViz 4.23\\Saved\\Screenshots\\Windows\\");
-					setReceivedMessage(str);
+					mailSender.setPath("C:\\Users\\Visometric2x6\\Desktop\\UnrealStudioProjectsAndrei\\VisoArchViz4.23\\Saved\\Screenshots\\Windows\\");
 					mailSender.sendMessage();
+					}
+
 					
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
@@ -63,16 +76,6 @@ public class UE4Server {
 		}
 
 }
-		public void setReceivedMessage(String str)
-		{
-			receivedMessage = str;
-		}
-		
-		public String getReceivedMessage()
-		{
-			return receivedMessage;
-		}
-
+	}
 }
 
-}

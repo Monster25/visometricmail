@@ -28,8 +28,8 @@ public class SendMail {
 	private static String USERNAME;
 	private static String PASSWORD;
 	
-	private static String EMAIL_FROM = "andreicioanca25@gmail.com";
-	private static final String EMAIL_TO = "andreicioanca25@gmail.com";
+	private static String EMAIL_FROM;
+	private static final String EMAIL_TO = "andrei@visometric.dk";
 	
 	private static final String EMAIL_TO_CC = "";
 	
@@ -96,7 +96,9 @@ public class SendMail {
 			
 			//File
 			MimeBodyPart p2 = new MimeBodyPart();
-			String filePath = path+name;
+			String fileExtension = ".png";
+			String filePath = path+name+fileExtension;
+			System.out.println(filePath);
 			FileDataSource fds = new FileDataSource(filePath);
 			p2.setDataHandler(new DataHandler(fds));
 			p2.setFileName(fds.getName());
