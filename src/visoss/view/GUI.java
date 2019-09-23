@@ -6,6 +6,8 @@ import javax.swing.JFrame;
 
 import visoss.controller.VisoSSController;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+
 import java.awt.BorderLayout;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -14,14 +16,16 @@ import javax.swing.JTextArea;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import javax.swing.UIManager;
+import javax.swing.WindowConstants;
 import javax.swing.border.Border;
 
 public class GUI implements VisoSSView {
 	
 	private JFrame mainFrame;
 	private VisoSSController controller;
-	private JTextField txtConnectedToUe;
-	private JTextField connection;
+	private JTextArea consoleArea;
+	private JPanel panel_1;
+	private JScrollPane scroll;
 	
 	public GUI()
 	{
@@ -31,37 +35,24 @@ public class GUI implements VisoSSView {
 	private void initialize()
 	{
 		mainFrame = new JFrame();
+		mainFrame.setSize(600, 400);
+		mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		
 		mainFrame.setTitle("Visometric Screenshot Sender");
 		
-		JPanel panel = new JPanel();
-		FlowLayout flowLayout = (FlowLayout) panel.getLayout();
-		mainFrame.getContentPane().add(panel, BorderLayout.CENTER);
+		panel_1 = new JPanel();
+		panel_1.setBorder(UIManager.getBorder("Menu.border"));
+		mainFrame.getContentPane().add(panel_1, BorderLayout.CENTER);
 		
-		txtConnectedToUe = new JTextField();
-		txtConnectedToUe.setEditable(false);
-		txtConnectedToUe.setFocusable(false);
-		txtConnectedToUe.setDisabledTextColor(UIManager.getColor("Panel.background"));
-		txtConnectedToUe.setBackground(Color.WHITE);
-		txtConnectedToUe.setHorizontalAlignment(SwingConstants.CENTER);
-		txtConnectedToUe.setText("Connected to UE4:");
-		panel.add(txtConnectedToUe);
-		txtConnectedToUe.setColumns(11);
+		consoleArea = new JTextArea();
+		consoleArea.setColumns(50);
+		consoleArea.setLineWrap(true);
+		consoleArea.setEditable(false);
+		consoleArea.setBackground(Color.WHITE);
+		panel_1.add(consoleArea);
+		scroll = new JScrollPane(consoleArea);
+		mainFrame.add(scroll);
 		
-		connection = new JTextField() {
-			@Override public void setBorder(Border border)
-			{
-				//No Border
-			}
-		};
-		connection.setEditable(false);
-		connection.setBorder(null);
-		connection.setForeground(Color.RED);
-		connection.setBackground(UIManager.getColor("Panel.background"));
-		connection.setHorizontalAlignment(SwingConstants.CENTER);
-		connection.setText("No");
-		panel.add(connection);
-		connection.setColumns(10);
 		
 
 	}
@@ -85,10 +76,15 @@ public class GUI implements VisoSSView {
 	}
 
 	@Override
-	public void show(String text) {
+	public void showConsole(String text) {
 		// TODO Auto-generated method stub
 		System.out.println("Server: "+text);
 		
+	}
+	
+	@Override
+	public void showGui(String text) {
+		consoleArea.append(text + "\n");
 	}
 
 }
