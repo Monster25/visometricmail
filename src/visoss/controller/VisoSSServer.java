@@ -22,7 +22,7 @@ public class VisoSSServer implements Runnable{
 		// TODO Auto-generated method stub
 		while (true)
 		{
-			controller.getView().showGui("Waiting for client to connect...");
+			controller.getView().showConsole(("Waiting for client to connect..."));
 			try {
 				//Accept client socket
 				Socket socket = welcomeSocket.accept();
@@ -36,7 +36,7 @@ public class VisoSSServer implements Runnable{
 			}
 			
 			catch (IOException e) {
-				controller.getView().showGui("Error in server. Message: " + e.getMessage());
+				controller.getView().showConsole("Error in server. Message: " + e.getMessage());
 			}
 		}
 		

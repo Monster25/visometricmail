@@ -36,7 +36,7 @@ public class GUI implements VisoSSView {
 	private void initialize()
 	{
 		mainFrame = new JFrame();
-		mainFrame.setSize(300, 200);
+		mainFrame.setSize(300, 100);
 		mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		
 		mainFrame.setTitle("Visometric Service");

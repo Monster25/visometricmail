@@ -58,7 +58,8 @@ public class Mail {
 	{
 		//set properties and connection info for smpt server
 		Properties properties = System.getProperties();
-		if (InitData.getInstance().getSecurityOption().equals("tls"))
+		if (SmtpData.getInstance().getSecurityOption().equals("tls"))
+			//office365 smtp
 		{
 			properties.put("mail.smtp.port", "587");
 			properties.put("mail.smtp.auth", true);
@@ -66,6 +67,7 @@ public class Mail {
 		}
 		else
 		{
+			//gmail smtp
 			properties.put("mail.smtp.socketFactory.port", "465");
 			properties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 		}
@@ -73,7 +75,7 @@ public class Mail {
 		Session session = Session.getInstance(properties,
                 new javax.mail.Authenticator() {
             		protected PasswordAuthentication getPasswordAuthentication() {
-            				return new PasswordAuthentication(InitData.getInstance().getUsername(), InitData.getInstance().getPassword());
+            				return new PasswordAuthentication(SmtpData.getInstance().getUsername(), SmtpData.getInstance().getPassword());
             }
         });
 		
@@ -109,7 +111,7 @@ public class Mail {
 			SMTPTransport t = (SMTPTransport) session.getTransport("smtp");
 			
 			//connect
-			t.connect(InitData.getInstance().getSmtp(), InitData.getInstance().getUsername(), InitData.getInstance().getPassword());
+			t.connect(SmtpData.getInstance().getSmtp(), SmtpData.getInstance().getUsername(), SmtpData.getInstance().getPassword());
 			
 			//send
 			t.sendMessage(msg,  msg.getAllRecipients());

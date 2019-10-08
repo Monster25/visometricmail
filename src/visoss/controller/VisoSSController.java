@@ -2,7 +2,7 @@ package visoss.controller;
 
 import java.io.IOException;
 
-import visoss.model.InitData;
+import visoss.model.SmtpData;
 import visoss.view.VisoSSView;
 
 public class VisoSSController {
@@ -16,7 +16,7 @@ public class VisoSSController {
 		
 		//Get port from file
 		try {
-			this.server = new VisoSSServer(InitData.getInstance().getServerPort(), this);
+			this.server = new VisoSSServer(SmtpData.getInstance().getServerPort(), this);
 			
 		} catch (IOException e1){
 			e1.printStackTrace();

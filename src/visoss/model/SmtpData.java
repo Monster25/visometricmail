@@ -4,29 +4,28 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class InitData {
+public class SmtpData {
 	
-	private static InitData instance;
+	private static SmtpData instance;
 	
 	private int serverPort;
 	private String username;
 	private String password;
 	private String securityOption;
 	private String smtp;
-	
-	private File initData = new File("initData.txt");
+	private File initData = new File("smtpData.txt");
 	private Scanner scanner;
 	
-	private InitData()
+	private SmtpData()
 	{
-		
+		setServerPort(59989);
 	}
 	
-	public static InitData getInstance()
+	public static SmtpData getInstance()
 	{
 		if (instance == null)
 		{
-			instance = new InitData();
+			instance = new SmtpData();
 		}
 		
 		return instance;
@@ -38,17 +37,11 @@ public class InitData {
 			scanner = new Scanner(initData);
 			String[] initData = scanner.nextLine().split(" ");
 			//Server port
-			InitData.getInstance().setServerPort(Integer.parseInt(initData[0]));
+			//SmtpData.getInstance().setServerPort(Integer.parseInt(initData[0]));
 			//Ssl or tls
-			InitData.getInstance().setSecurityOption(initData[1]);
+			SmtpData.getInstance().setSecurityOption(initData[0]);
 			//Smtp 
-			InitData.getInstance().setSmtp(initData[2]);
-			
-	
-			//username
-			InitData.getInstance().setUsername(initData[3]);
-			//password
-			InitData.getInstance().setPassword(initData[4]);
+			SmtpData.getInstance().setSmtp(initData[1]);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
