@@ -57,8 +57,8 @@ public class VisoSSThreadHandler implements Runnable {
 				str = str.replaceAll("\u0000", "");
 				view.showGui(ip + " -> " + str);	
 				//Send mail
-				Mail sendMail = new Mail(view, "tudor@visometric.dk", "andreicioanca25@gmail.com", "", "Bitch", "Cacat", str, "C:\\Users\\Visometric2x6\\Desktop\\UnrealStudioProjectsAndrei\\VisoArchViz4.23\\Saved\\Screenshots\\Windows\\", ".png");
-				sendMail.sendMessage();
+				//Mail sendMail = new Mail(view, "tudor@visometric.dk", "andreicioanca25@gmail.com", "", "Bitch", "Cacat", str, "C:\\Users\\Visometric2x6\\Desktop\\UnrealStudioProjectsAndrei\\VisoArchViz4.23\\Saved\\Screenshots\\Windows\\", ".png");
+			//	sendMail.sendMessage();
 
 				} 
 		 view.showGui("Closing connection to client: " + ip);
