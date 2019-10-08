@@ -6,8 +6,8 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Visometric2x6/Downloads/javax.mail.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Visometric2x6/Downloads/javax.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Visometric2x6/Downloads/javax.activation-1.2.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Visometric2x6/Desktop/EclipseWorkspace/VisometricScreenShotSender/resources/javax.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Visometric2x6/Desktop/EclipseWorkspace/VisometricScreenShotSender/resources/javax.mail-1.6.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Visometric2x6/Desktop/EclipseWorkspace/VisometricScreenShotSender/resources/activation-1.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
