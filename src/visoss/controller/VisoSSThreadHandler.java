@@ -55,13 +55,14 @@ public class VisoSSThreadHandler implements Runnable {
 				str = new String(buffer);
 				//Remove empty spaces left over from buffer
 				str = str.replaceAll("\u0000", "");
-				view.showGui(ip + " -> " + str);	
+				view.showConsole(ip + " -> " + str);	
 				//Send mail
-				//Mail sendMail = new Mail(view, "tudor@visometric.dk", "andreicioanca25@gmail.com", "", "Bitch", "Cacat", str, "C:\\Users\\Visometric2x6\\Desktop\\UnrealStudioProjectsAndrei\\VisoArchViz4.23\\Saved\\Screenshots\\Windows\\", ".png");
-			//	sendMail.sendMessage();
+				Mail sendMail = new Mail(view, "tudor@visometric.dk", "horvathstefandaniel@gmail.com", "", "VisomtricDemo", "Hey! Don't forget your Visometric Demo Screenshot!", str, "E:\\AndreiUnrealEngineProjects\\VisoArchViz\\NewVisoArchViz\\Saved\\Screenshots\\Windows\\", ".png");
+				sendMail.sendMessage();
+				view.showConsole("Mail Sent!");
 
 				} 
-		 view.showGui("Closing connection to client: " + ip);
+		 view.showConsole("Closing connection to client: " + ip);
 		}
 		catch (Exception e1) {
 		// TODO Auto-generated catch block
@@ -70,7 +71,7 @@ public class VisoSSThreadHandler implements Runnable {
 		{
 			message = "Connection lost";
 	}
-		view.showGui("Error for client: " + ip + " - Message: " + message);
+		view.showConsole("Error for client: " + ip + " - Message: " + message);
 		}
 		
 	}

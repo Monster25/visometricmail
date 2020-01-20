@@ -1,1 +1,1 @@
-ssl smtp.gmail.com
+tls smtp.office365.com

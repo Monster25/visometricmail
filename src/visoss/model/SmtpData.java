@@ -42,6 +42,8 @@ public class SmtpData {
 			SmtpData.getInstance().setSecurityOption(initData[0]);
 			//Smtp 
 			SmtpData.getInstance().setSmtp(initData[1]);
+			SmtpData.getInstance().setUsername("tudor@visometric.dk");
+			SmtpData.getInstance().setPassword("Mergebine1%");
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
